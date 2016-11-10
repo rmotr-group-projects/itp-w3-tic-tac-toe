@@ -1,4 +1,4 @@
-from .exceptions import InvalidMovementException
+from tic_tac_toe.exceptions import InvalidMovementException
 class Game(object):
 
     def __init__(self, board, player_1, player_2):
