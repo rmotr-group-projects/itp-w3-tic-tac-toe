@@ -1,25 +1,56 @@
 class Game(object):
+    VALID_POSITIONS = list(range(3))
 
     def __init__(self, board, player_1, player_2):
-        pass
+        self.board = board
+        self.player_1 = player_1
+        self.player_2 = player_2
+
+        self.next_player = self.player_1
 
     def is_finished(self):
-        pass
+        return self.has_winner() or self.is_tied()
 
     def has_winner(self):
-        pass
+        return self.get_winner() is not None
 
     def is_tied(self):
-        pass
+        for elem in self.board.flatten():
+            if elem is None:
+                return False
+        return True
 
     def get_winner(self):
-        pass
+        valid_combinations = [
+            self.board.get_row(i) for i in range(3)
+        ] + [
+            self.board.get_diagonal(i) for i in range(2)
+        ] + [
+            self.board.get_column(i) for i in range(3)
+        ]
+        for combination in valid_combinations:
+            elems = set(combination)
+            if None not in elems and len(elems) == 1:
+                return combination[0]
+
+        return None
 
     def next_turn(self):
-        pass
+        return self.next_player
 
     def move(self, player, row, col):
-        pass
+        invalid_move_condition = (
+            player != self.next_player or
+            row not in self.VALID_POSITIONS or
+            col not in self.VALID_POSITIONS or
+            self.board.get_row(row)[col] is not None or
+            self.is_finished()
+        )
+        if invalid_move_condition:
+            raise InvalidMovementException()
+
+        self.board.move(player, row, col)
+self.next_player = 'X' if player == 'O' else 'O'
 
 
 BOARD_TEMPLATE = """
