@@ -32,7 +32,7 @@ setup(
     packages=['tic_tac_toe'],
     maintainer='rmotr.com',
     tests_require=[
-        'pytest==3.0.3',
+        'pytest==3.0.6',
         'pytest-cov==2.4.0',
         'coverage==4.2'
     ],
