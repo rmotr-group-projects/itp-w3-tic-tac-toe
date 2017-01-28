@@ -1,3 +1,5 @@
+from .exceptions import InvalidMovementException
+
 class Game(object):
     VALID_POSITIONS = list(range(3))
 
@@ -50,7 +52,7 @@ class Game(object):
             raise InvalidMovementException()
 
         self.board.move(player, row, col)
-self.next_player = 'X' if player == 'O' else 'O'
+        self.next_player = 'X' if player == 'O' else 'O'
 
 
 BOARD_TEMPLATE = """
@@ -76,6 +78,9 @@ class Board(object):
                 [None, None, None],
                 [None, None, None]
             ]
+
+    def flatten(self):
+        return [item for sublist in self.board for item in sublist]
 
     def move(self, figure, row, col):
         self.board[row][col] = figure
