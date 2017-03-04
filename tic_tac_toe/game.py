@@ -11,8 +11,6 @@ class Game(object):
     def is_finished(self):
         if self.has_winner() or self.is_tied():
             return True
-        else:
-            return False
 
     def has_winner(self):
         if self.get_winner():
@@ -20,23 +18,19 @@ class Game(object):
             
     def is_tied(self):
         for i in range(3):
-            for j in range (3):
-                if self.board.get_row(i)[j] is None:
-                    return False
+            if None in self.board.get_row(i):
+                return False
         return True
 
     def get_winner(self):
         winner1 = ['X', 'X', 'X']
         winner2 = ['O', 'O', 'O']
         for i in range(3):
-            if self.board.get_row(i) == winner1:
+            if (self.board.get_row(i) == winner1
+                or self.board.get_column(i) == winner1):
                 return winner1[0]
-            elif self.board.get_row(i) == winner2:
-                return winner2[0]
-        for i in range(3):
-            if self.board.get_column(i) == winner1:
-                return winner1[0]
-            elif self.board.get_column(i) == winner2:
+            elif (self.board.get_row(i) == winner2
+                  or self.board.get_column(i) == winner2):
                 return winner2[0]
         for i in range(2):
             if self.board.get_diagonal(i) == winner1:
@@ -44,20 +38,20 @@ class Game(object):
             elif self.board.get_diagonal(i) == winner2:
                 return winner2[0]
         return None
-
+        
     def next_turn(self):
         return self.next_player
 
     def move(self, player, row, col):
         
         invalid_moves= (  
-            row not in range(3) or
-            col not in range(3) or
-            self.is_finished() or 
-            self.board.board[row][col] is not None or
-            player != self.next_player 
+            row not in range(3) 
+            or col not in range(3) 
+            or self.is_finished() 
+            or self.board.board[row][col] is not None 
+            or player != self.next_player 
             )
-         #game.move('X', row=3, col=0)
+
         if invalid_moves:
             raise InvalidMovementException
             
@@ -96,16 +90,11 @@ class Board(object):
         self.board[row][col] = figure
 
     def __str__(self):
-        return BOARD_TEMPLATE.format(
-            self.board[0][0] or '-',
-            self.board[0][1] or '-',
-            self.board[0][2] or '-',
-            self.board[1][0] or '-',
-            self.board[1][1] or '-',
-            self.board[1][2] or '-',
-            self.board[2][0] or '-',
-            self.board[2][1] or '-',
-            self.board[2][2] or '-',)
+        format_list = ([self.board[i][j] if self.board[i][j]
+                       is not None else '-'
+                       for i in range(3)
+                       for j in range(3)])
+        return BOARD_TEMPLATE.format(*format_list)
         
     def get_row(self, row_number):
         return self.board[row_number]
