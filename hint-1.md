@@ -4,6 +4,7 @@ If you chose a list of lists to represent your board, getting rows, columns and 
 
 Example:
 
+**Important: We're just helping you with the functions, you should turn this into an OOP style**
 
 ```python
 board_data_as_lists = [
