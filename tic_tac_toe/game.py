@@ -21,7 +21,7 @@ class Game(object):
     def move(self, player, row, col):
         pass
 
-
+# Do not change or the tests will fail.
 BOARD_TEMPLATE = """
      |     |
   {}  |  {}  |  {}
