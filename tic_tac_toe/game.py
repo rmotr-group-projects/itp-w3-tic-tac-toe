@@ -1,4 +1,4 @@
-from exceptions import InvalidMovementException
+from Exceptions import InvalidMovementException
 
 class Game(object):
 
