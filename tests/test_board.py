@@ -1,6 +1,8 @@
 import unittest
 
 from tic_tac_toe.game import Board
+from tic_tac_toe.exceptions import InvalidMovementException
+
 
 
 EMPTY_BOARD = """
