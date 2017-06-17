@@ -29,43 +29,31 @@ class Game(object):
                 return self.player_1
             if row == ['O', 'O', 'O']:
                 return self.player_2
-
-        for column_num in range(3):
-            col_list = []
-            if self.board.get_column(column_num) == ['X', 'X', 'X']:
-                return self.player_1
-            elif self.board.get_column(column_num) == ['O', 'O', 'O']:
-                return self.player_2
-           
-        for diag in range(2):
-            if self.board.get_diagonal(diag) == ['X', 'X', 'X']:
-                return self.player_1
-            if self.board.get_diagonal(diag) == ['O', 'O', 'O']:
-                return self.player_2
-
+            
+        if self.board.get_column():
+            
+     
+            
+        if self.board.get_diagonal():
+            
 
     def next_turn(self):
-        return self.next_player
+        return next_player
 
     def move(self, player, row, col):
-        if player != self.player_1 and player != self.player_2:
-            raise InvalidMovementException()
-        if player != self.next_player:
+        if player != self.player_1 or player != self.player_2:
             raise InvalidMovementException()
         if row > 2 or row < 0:
             raise InvalidMovementException()
         if col > 2 or col < 0:
             raise InvalidMovementException()
-        if self.board.board[row][col] is not None:
+        if self.board[row][col] is not None:
             raise InvalidMovementException()
-        if self.is_finished():
+        return self.board
             raise InvalidMovementException()
         else:
             self.board.move(player, row, col)
-            if self.next_player == 'X':
-                self.next_player = 'O'
-            elif self.next_player == 'O':
-                self.next_player = 'X'
+            player = self.next_player
 
 
 BOARD_TEMPLATE = """
