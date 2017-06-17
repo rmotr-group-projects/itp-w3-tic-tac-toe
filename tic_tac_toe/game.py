@@ -113,8 +113,16 @@ class Board(object):
         self.board[row][col] = figure
 
     def __str__(self):
-        return BOARD_TEMPLATE.format(self.board[0][0] or '-', self.board[0][1] or '-', self.board[0][2] or '-',self.board[1][0] or '-',self.board[1][1] or '-', 
-                                    self.board[1][2] or '-',self.board[2][0] or '-',self.board[2][1] or '-',self.board[2][2] or '-',)  # .format()
+        return BOARD_TEMPLATE.format(
+            self.board[0][0] or '-', 
+            self.board[0][1] or '-', 
+            self.board[0][2] or '-',
+            self.board[1][0] or '-',
+            self.board[1][1] or '-',
+            self.board[1][2] or '-',
+            self.board[2][0] or '-',
+            self.board[2][1] or '-',
+            self.board[2][2] or '-',) 
 
     def get_row(self, row_number):
         return self.board[row_number]
